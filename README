@@ -26,9 +26,9 @@ It's so generic, so simple, so concise... that I turned into a cat. Meow~
 
   ~ ~ ~ Example of Server ~ ~ ~
 
-This pretty short pseudo-code explain where the modules can interract
+This pretty short pseudo-code explains where the modules can interact
 with the server classic process to receive, treat and answer request.
-As you can see, it can interract in every step during the process
+As you can see, it can interact in every step during the process
 and it's so simple, generic and concise that you can do everything
 you want with just a few steps.
 
