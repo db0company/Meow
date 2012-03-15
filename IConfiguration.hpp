@@ -1,6 +1,7 @@
 /*
  * iconfiguration.hpp for zia
  * by le-cor_w
+ * modified by 
  */
 
 #ifndef __ICONFIGURATION_HPP__
@@ -17,11 +18,11 @@ namespace zia {
 	STRING,
 	INT,
 	DOUBLE,
-      };
+    };
 
     class Node {
 
-    public:
+    private:
 
       Data_type				_type;
       std::string			_name;

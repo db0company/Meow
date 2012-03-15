@@ -1,13 +1,60 @@
 
-.,__,.........,__,....... _______
+     o  +           +        +    
+ o          +                    o
+     o                 +          
+ +      o     +              o    
+  o     +        o               +
+ _-_-_-_-_-_-_-,------,  o      + 
+ -_-_-_-_-_-_-_|   /\_/\    +     
+ _-_-_-_-_-_-_~|__( ◕ .◕)  meow~  
+ -_-_-_-_-_-_-_  ""  ""       
+ +      +     o        o      +   
+ o        +                o     +
+ +      o         +     +       o 
+     +         +                  
+        +           o        +    
 
-`·.,¸,.·*¯`·.,¸,.·*¯..|::::::/\:_|/\
+  ~ Meow ~
 
-`·.,¸,.·*¯`·.,¸,.·*¯<|:::::( ◕ᴥ◕)
+The simplest API ever for your implementation of the HTTP Server Zia.
+Vote for us, and you will not have to change anything in your server code.
+It's so generic, so simple, so concise... that I turned into a cat. Meow~
 
--........--""-.......--"""u"''''''''''u''''''''u
+                         ~ Official WebSite : http://meow.paysdu42.fr/ ~
 
-Meow
-====
 
-The simplest API _EVER_ for your implementation of the HTTP Server Zia.
+
+  ~ ~ ~ Example of Server ~ ~ ~
+
+This pretty short pseudo-code explain where the modules can interract
+with the server classic process to receive, treat and answer request.
+As you can see, it can interract in every step during the process
+and it's so simple, generic and concise that you can do everything
+you want with just a few steps.
+
+Zia {
+  Initialisation/configuration/...
+  IModule->onModuleLoad
+  While (accept connections ; IModule->onConnection) {
+    IModule->beforeReadHeader
+    read header and fill IRequest
+    IModule->afterReadHeader
+    IModule->beforeReadContent
+    read content (using the info size in the header) and fill IRequest
+    IModule->afterReadContent
+    if (!IModule->letMeDoThisMethod) {
+        IModule->execBeforeMethod
+	do the default behavior
+	IModule->execAfterMethod
+     }
+    if (!(answer = IModule->letMeDoTheAnswer)) {
+        answer = forge default answer
+        answer = IModule->modifyAnswer(answer)
+     }
+    send answer
+   }
+  disconnection && IModule->disconnect
+  }
+}
+
+

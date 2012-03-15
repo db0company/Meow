@@ -1,52 +1,44 @@
+/*
+ * IModule.h for zia
+ * by lepage_b
+ * modified by 
+ */
 
 #ifndef		NETWORK_H_
 # define	NETWORK_H_
 
 namespace zia {
+  namespace network {
 
-  class		ANetwork {
+    class	IClient {
+      virtual ~IClient() {};
+    };
 
-/* ************************************************************************* */
-/*                             Attributes                                    */
-/* ************************************************************************* */
-    template <typename T>
-    std::function<T> load(std::string const &symbol_name) {
-      return std::function<T>(reinterpret_cast<T*>(load(symbol_name)));
+    class	INetwork {
+      virtual ~INetwork() {};
 
- protected:
-    void	(*onNewClient)(void);
-    void	(*onClientLeave)(void);
-    void	(*onClientRequest)(void);
+     protected:
+      // open server network
+      // return false on failure, true otherwise
+      virtual bool	openConnection(int port = 0) = 0;
+      
+      // close server network
+      virtual void	closeConnection(void) = 0;
+      
+      // return true if the server is connected,
+      // false otherwise
+      virtual bool	isConnected(void) = 0;
 
-/* ************************************************************************* */
-/*                             Constructor                                   */
-/* ************************************************************************* */
-  protected:
-    ANetwork(void (*onNewClient)(void) = 0,
-	     void (*onClientLeave)(void) = 0,
-	     void (*onClientRequest)(void) = 0)
-      : onNewClient(onNewClient),
-	onClientLeave(onClientLeave),
-	onClientRequest(onClientRequest) {
-    }
+      // Called when a client connect to the server
+      virtual void	onNewClient(void) = 0;
 
-/* ************************************************************************* */
-/*                             Member Functions                              */
-/* ************************************************************************* */
+      // Called when a client disconnect
+      virtual void	onClientLeave(void) = 0;
 
-    // open server network
-    // return false on failure, true otherwise
-    virtual bool	openConnection(int port = 0) = 0;
-
-    // close connection
-    // On failure, just warn, never fail with error
-    virtual void	closeConnection(void) = 0;
-
-    // return true if the server is connected,
-    // false otherwise
-    virtual bool	isConnected(void) = 0;
-  };
-
-}
-
+      // Called when a client has something to read
+      virtual void	onClientRequest(void) = 0;
+    };
+    
+  }
+}  
 #endif		// !NETWORK_H_
