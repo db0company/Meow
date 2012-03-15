@@ -34,7 +34,7 @@ IMGS=(
         +           o        +    \n
 " )
 REFRESH="0.5"
-AUDIO_FILE="/tmp/nyan-cat.mp3"
+AUDIO_FILE="nyan-cat.mp3"
 # end
 
 # count lines of first ascii picture in array
@@ -55,7 +55,7 @@ sigtrap()
 
     # stop audio
     #kill `pgrep vlc`
-    #kill `pgrep mplayer` 2&> /dev/null
+    kill `pgrep mplayer` 2&> /dev/null
 
     echo "caught signal SIGINT(CTRL+C), quitting ..."
     exit 1
@@ -66,7 +66,7 @@ IFS='%'
 
 # start audio, vlc & mplayer examples
 #vlc $AUDIO_FILE --quiet --loop --volume=100 &
-#mplayer -really-quiet -loop 0 $AUDIO_FILE < /dev/null &
+mplayer -really-quiet -loop 0 $AUDIO_FILE < /dev/null &
 
 # hide the cursor
 tput civis
